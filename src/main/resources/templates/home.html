@@ -1,10 +1,38 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleHome.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+	<link rel="icon" href="/img/LC.png" type="image/x-icon">
+	<script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
-<p th:text="'Hello, ' + ${title} + '!'" />
+	<header>
+		<a href="#"><img src="/img/lclogogo.png" class="logo" alt="logo"></a>
+		<ul>
+			<li><a href="#">Главная</a></li>
+			<li><a href="#">Задачи</a></li>
+			<li><a href="#">Магазин</a></li>
+			<li><a href="#">FAQ</a></li>
+		</ul>
+		<!-- <div class="container">
+			<img src="/img/lclogogo.png" alt="logo" class="logo">
+
+			<nav class="navigation">
+				<ul>
+					<li><a href="#">Главная</a></li>
+					<li><a href="#">Задачи</a></li>
+					<li><a href="#">Магазин</a></li>
+					<li><a href="#">FAQ</a></li>
+
+				</ul>
+			</nav>
+		</div> -->
+	</header>
+	<section class="banner"></section>
 </body>
 </html>
