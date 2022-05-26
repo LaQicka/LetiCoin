@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task list</title>
+</head>
+<body>
+<div th:each="elem : ${tasks}">
+    <a th:href="@{/tasks/{id} ( id = ${elem.getId()} ) }">Перейти к решению</a>
+    <p th:text="${elem.getId()}">VALUE</p>
+    <p th:text="${elem.getTask()}">VALUE</p>
+    <p th:text="${elem.getCondition()}">VALUE</p>
+    <br/>
+</div>
+</body>
+</html>

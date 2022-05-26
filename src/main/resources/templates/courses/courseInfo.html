@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${course.getName()}">Title</title>
+</head>
+<body>
+<div th:each="elem : ${tasks}">
+    <a th:href="@{/users/{user_id}/courses/{course_id}/{task_id} (user_id = ${user.getId()}, course_id = ${course.getId()}, task_id = ${elem.getId()}) }">Перейти к решению</a>
+    <p th:text="${elem.getId()}">VALUE</p>
+    <p th:text="${elem.getTask()}">VALUE</p>
+    <p th:text="${elem.getCondition()}">VALUE</p>
+    <br/>
+</div>
+</body>
+</html>
