@@ -1,6 +1,7 @@
 package com.leticoin.webapp.controller;
 
 import com.leticoin.webapp.dao.TaskDAO;
+import com.leticoin.webapp.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,24 +12,17 @@ public class TaskController {
     @Autowired
     private TaskDAO taskDAO;
 
-    @GetMapping("/tasks")
-    public String tasks(Model model){
-        model.addAttribute("tasks",taskDAO.getTasks());
-        return "tasks/tasksList"; // list of tasks
-    }
-
-    @GetMapping("/tasks/{id}")
-    public String task_info(@PathVariable("id") int id, Model model){
-        model.addAttribute("task", taskDAO.getTaskById(id));
-        return "tasks/task"; // page of task with field to answer
+    @GetMapping("/users/{user_id}/courses/{course_id}/{task_id}")
+    public String tasks(@PathVariable("user_id") int user_id, @PathVariable("course_id") int course_id, @PathVariable("task_id") int task_id,Model model){
+        model.addAttribute("task",taskDAO.getTaskById(task_id));
+        return "tasks/task";
     }
 
     @PostMapping("/tasks/{id}")
-    public String checkAnswer(@RequestParam(value = "id", required = false, defaultValue = "0") int id, @ModelAttribute("task") String answer){
+    public String checkAnswer(@PathVariable("id") int id, @ModelAttribute("task") Task task){
 
-        System.out.println(answer);
-
+        System.out.println(id);
+        System.out.println(task.getAnswer());
         return "redirect:/tasks/{id}"; // need to rework
     }
-
 }
