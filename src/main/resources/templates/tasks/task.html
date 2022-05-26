@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task</title>
+    </head>
+    <body>
+
+        <p th:text="${task.getTask()}">VALUE</p>
+        <p th:text="${task.getCondition()}">VALUE</p>
+        <p th:text="${task.getAnswer()}" class="taskAnswer">VALUE</p>
+
+<!--        <label for="answer">Answer: </label>-->
+<!--        <input type="text" id="Answer" class="Answer"/>-->
+<!--        <br/>-->
+<!--        <button> Submit </button>-->
+
+        <form th:method="POST" th:action="@{/tasks/{temp}(temp = ${task.getId()})}" th:object="${task}">
+
+<!--            <label for="answer"></label>-->
+            <input type="text" th:field="*{answer}" id="answer"/>
+
+            <br/>
+            <input type="submit" value="Submit"/>
+        </form>
+
+    </body>
+</html>

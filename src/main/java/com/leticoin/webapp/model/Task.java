@@ -9,15 +9,19 @@ import javax.persistence.Id;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long task_id;
 
     private String task;
     private String condition;
+    private String answer;
+    private Long course;
 
-    public Task(Long id, String task, String condition) {
-        this.id = id;
+    public Task(Long id, String task, String condition, String answer, Long course) {
+        this.task_id = id;
         this.task = task;
         this.condition = condition;
+        this.answer = answer;
+        this.course = course;
     }
 
     public String getCondition() {
@@ -29,11 +33,11 @@ public class Task {
     }
 
     public Long getId() {
-        return id;
+        return task_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.task_id = id;
     }
 
     public String getTask() {
@@ -42,5 +46,21 @@ public class Task {
 
     public void setTask(String task) {
         this.task = task;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public Long getCourse() {
+        return course;
+    }
+
+    public void setCourse(Long course) {
+        this.course = course;
     }
 }

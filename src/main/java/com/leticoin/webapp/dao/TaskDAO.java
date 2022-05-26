@@ -3,27 +3,60 @@ package com.leticoin.webapp.dao;
 import com.leticoin.webapp.model.Task;
 import org.springframework.stereotype.Component;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class TaskDAO {
-    public static long TASK_counter = 0;
-    private List<Task> tasks;
+    public static final String URL = "jdbc:postgresql://localhost/LetiCoin_first_db";
+    public static final String USERNAME = "postgres";
+    public static final String PASSWORD = "23922392";
 
-    {
-        tasks = new ArrayList<>();
-        tasks.add(new Task(++TASK_counter,"Решить диофантовое уравнение","16x+7y=15"));
-        tasks.add(new Task(++TASK_counter,"Решить диофантовое уравнение","42x+36y=48"));
-        tasks.add(new Task(++TASK_counter,"Решить диофантовое уравнение","2x+3y=5"));
-    }
+    private static Connection connection;
+    static {
 
-    public List<Task> getTasks() {
-        return tasks;
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public Task getTaskById(long id){
-        for(int i=0;i<tasks.size();i++) if (tasks.get(i).getId() == id) return tasks.get(i);
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Task WHERE taskid = " + id);
+            while(resultSet.next()){
+                Task task = new Task(resultSet.getLong("taskid"),resultSet.getString("task"),resultSet.getString("condition"),resultSet.getString("answer"),resultSet.getLong("courseid"));
+                return task;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+
+    public List<Task> getTasksByCourseId(long id){
+        List<Task> courseTasks = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Task WHERE courseid = " + id);
+            while(resultSet.next()){
+                Task task = new Task(resultSet.getLong("taskid"),resultSet.getString("task"),resultSet.getString("condition"),resultSet.getString("answer"),resultSet.getLong("courseid"));
+                courseTasks.add(task);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courseTasks;
     }
 }
