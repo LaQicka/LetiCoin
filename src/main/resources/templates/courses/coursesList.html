@@ -5,8 +5,9 @@
     <title>Courses List</title>
 </head>
 <body>
-<div th:each="elem : ${courses}">
-    <a th:href="@{/users/{user_id}/courses/{course_id} ( user_id = ${user.getId()}, course_id = ${elem.getId()} ) }" th:text="${elem.getName()}">VALUE</a>
+<div th:each="elem : ${courses}" >
+    <a th:href="@{/users/{user_id}/courses/{course_id} ( user_id = ${user.getId()}, course_id = ${elem.getCourse().getId()} ) }" th:text="${elem.getCourse().getName()}">VALUE</a>
+    <p th:text="${elem.getAmount()}">VALUE</p>
     <br/>
 </div>
 </body>

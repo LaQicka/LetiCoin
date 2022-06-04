@@ -4,9 +4,11 @@ import com.leticoin.webapp.dao.CourseDAO;
 import com.leticoin.webapp.dao.TaskDAO;
 import com.leticoin.webapp.dao.UserDAO;
 import com.leticoin.webapp.model.Course;
+import com.leticoin.webapp.model.CourseAmountPair;
 import com.leticoin.webapp.model.Task;
 import com.leticoin.webapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,7 @@ public class CourseController {
     @GetMapping("/users/{user_id}/courses")
     public String courseList(@PathVariable("user_id") int user_id, Model model){
         User user = userDAO.getUserById(user_id);
-        List<Course> courses = new ArrayList<>();
-        for(int i=0;i<user.getCourses().size();i++){
-            Long id = user.getCourses().get(i);
-            if(id != 0) courses.add(courseDAO.getCourseById(id));
-        }
+        List<CourseAmountPair> courses = courseDAO.findUserCourses(user.getId());
         model.addAttribute("courses", courses);
         model.addAttribute("user", user);
         return "courses/coursesList.html";
@@ -43,7 +41,8 @@ public class CourseController {
         Course course = courseDAO.getCourseById(course_id);
         model.addAttribute("user",user);
         model.addAttribute("course",course);
-        model.addAttribute("tasks",taskDAO.getTasksByCourseId(course_id));
+        List<Task> c = taskDAO.getTasksByCourseId(course_id);
+        model.addAttribute("tasks",c);
         return "courses/courseInfo";
     }
 }

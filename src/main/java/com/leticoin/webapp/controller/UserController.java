@@ -26,16 +26,4 @@ public class UserController {
         model.addAttribute("user", userDAO.getUserById(id));
         return "user"; // page of user profile
     }
-
-    @GetMapping("/users/new")
-    public String newUser(Model model){
-        model.addAttribute("user", new User());
-        return "new"; // page with creation new user
-    }
-
-    @PostMapping("/users")
-    public String create(@ModelAttribute("user") User user){
-        userDAO.create(user);
-        return "redirect:/users"; // page that update list of users
-    }
 }

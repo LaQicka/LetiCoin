@@ -44,12 +44,6 @@ public class UserDAO {
                 user.setId(resultSet.getLong("userid"));
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
-                user.addCourse(resultSet.getLong("course1id"));
-                user.addCourse(resultSet.getLong("course2id"));
-                user.addCourse(resultSet.getLong("course3id"));
-                user.addCourse(resultSet.getLong("course4id"));
-                user.addCourse(resultSet.getLong("course5id"));
-
                 users.add(user);
             }
 
@@ -65,23 +59,25 @@ public class UserDAO {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Person WHERE userid = " + id);
             if(resultSet.next()){
                 User user = new User();
-                List<Long> courses = new ArrayList<>();
                 user.setId(id);
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
-                courses.add(resultSet.getLong("course1id"));
-                courses.add(resultSet.getLong("course2id"));
-                courses.add(resultSet.getLong("course3id"));
-                courses.add(resultSet.getLong("course4id"));
-                courses.add(resultSet.getLong("course5id"));
-                user.setCourses(courses);
                 return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    public void addCourse(long user_id, long course_id){
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "insert into personcourses values(" + user_id + "," + course_id + "," + 0 +" )";
+            statement.executeUpdate(SQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void create(User user){
