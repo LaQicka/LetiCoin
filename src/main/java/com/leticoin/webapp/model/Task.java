@@ -15,13 +15,15 @@ public class Task {
     private String condition;
     private String answer;
     private Long course;
+    private int price;
 
-    public Task(Long id, String task, String condition, String answer, Long course) {
+    public Task(Long id, String task, String condition, String answer, Long course, int price) {
         this.task_id = id;
         this.task = task;
         this.condition = condition;
         this.answer = answer;
         this.course = course;
+        this.price = price;
     }
 
     public String getCondition() {
@@ -62,5 +64,13 @@ public class Task {
 
     public void setCourse(Long course) {
         this.course = course;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
