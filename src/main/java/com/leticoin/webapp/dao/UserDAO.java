@@ -70,6 +70,25 @@ public class UserDAO {
         return null;
     }
 
+    public User findByEmail(String email){
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Person WHERE email = " + email);
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getLong("userid"));
+                user.setEmail(resultSet.getString("email"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setPassword(resultSet.getString("password"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void addCourse(long user_id, long course_id){
         try {
             Statement statement = connection.createStatement();
