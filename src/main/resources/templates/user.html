@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>User</title>
+    <meta charset="UTF-8">
+    <title>User</title>
 </head>
-  <body>
-    <p th:text="${user.getName()}">VALUE</p>
-    <p th:text="${user.getSurname()}">VALUE</p>
+<body>
+<p th:text="${user.getFirstName()}">VALUE</p>
+<p th:text="${user.getLastName()}">VALUE</p>
 
-    <a th:href="@{/users/{id}/courses ( id = ${user.getId()} ) }">List of courses</a>
+<a th:href="@{/users/{id}/courses ( id = ${user.getId()} ) }">List of courses</a>
 
-  </body>
+</body>
 </html>

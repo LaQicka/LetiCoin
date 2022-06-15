@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link rel="icon" href="/img/LC.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleHome.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleCoursePage.css}">
+    <script type="text/javascript" src="/js/index.js"></script>
+</head>
+<body>
+<header>
+    <a href="/" th:href = "@{/home}"><img src="/img/lclogogo.png" class="logo" alt="logo"></a>
+    <ul>
+        <li><a href="/" th:href = "@{/home}">Главная</a></li>
+        <li><a href="/" th:href = "@{/courses}">Курсы</a></li>
+        <li><a href="/" th:href = "@{/shop}">Магазин</a></li>
+        <li><a href="/" th:href = "@{/faq}">FAQ</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</header>
+
+<div class="task-to-solve">
+    <p th:text="${task.getTask()}">VALUE</p>
+    <p th:text="${task.getCondition()}">VALUE</p>
+    <p th:text="${task.getAnswer()}"> </p>
+    <p th:text="${task.getPrice()}">VALUE</p>
+    <p th:text="${solved}">VALUE</p>
+
+    <!--        <label for="answer">Answer: </label>-->
+    <!--        <input type="text" id="Answer" class="Answer"/>-->
+    <!--        <br/>-->
+    <!--        <button> Submit </button>-->
+
+    <form th:method="POST" th:action="@{/courses/{course_id}/{task_id}
+             (course_id = ${course.getId()}, task_id = ${task.getId()} ) }">
+
+        <label for="answer">Answer</label>
+        <input name="answer" type="text" id="answer"/>
+
+        <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+</body>
+</html>
