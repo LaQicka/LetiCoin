@@ -5,10 +5,10 @@
 </head>
 <body>
 <div th:each="elem : ${users}">
-    <a th:href="@{/users/{id} ( id = ${elem.getId()} ) }" th:text = "${elem.getName()}">user</a>
+    <a th:href="@{/users/{id} ( id = ${elem.getId()} ) }" th:text = "${elem.getFirstName()}">user</a>
     <p th:text="${elem.getId()}">VALUE</p>
-    <p th:text="${elem.getName()}">VALUE</p>
-    <p th:text="${elem.getSurname()}">VALUE</p>
+    <p th:text="${elem.getFirstName()}">VALUE</p>
+    <p th:text="${elem.getLastName()}">VALUE</p>
     <br/>
 </div>
 </body>

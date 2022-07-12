@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="icon" href="/img/LC.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleHome.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="/js/index.js"></script>
+</head>
+<body>
+<header>
+    <a href="/" th:href = "@{/home}"><img src="/img/lclogogo.png" class="logo" alt="logo"></a>
+    <ul>
+        <li><a href="/" th:href = "@{/home}">Главная</a></li>
+        <li><a href="/" th:href = "@{/courses}">Курсы</a></li>
+        <li><a href="/" th:href = "@{/shop}">Магазин</a></li>
+        <li><a href="/" th:href = "@{/faq}">FAQ</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</header>
+
+</body>
+</html>

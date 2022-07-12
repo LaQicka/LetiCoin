@@ -1,0 +1,29 @@
+package com.leticoin.webapp.controller;
+
+import com.leticoin.webapp.dao.UserD;
+import com.leticoin.webapp.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class UserController {
+    @Autowired
+    private UserD userDAO;
+
+    @GetMapping("/users")
+    public String index(Model model){
+        model.addAttribute("users", userDAO.getUsers());
+        return "list"; // list of users with parameters
+    }
+
+    @GetMapping("/users/{id}")
+    public String show(@PathVariable("id") int id, Model model){
+        model.addAttribute("user", userDAO.getUserById(id));
+        return "user"; // page of user profile
+    }
+}

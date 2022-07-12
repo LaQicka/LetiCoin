@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses List</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleCoursePage.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="icon" href="/img/LC.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../static/css/styleHome.css" th:href="@{/css/styleHome.css}">
+    <script type="text/javascript" src="/js/index.js"></script>
+</head>
+<body>
+<header>
+    <a href="/" th:href = "@{/home}"><img src="/img/lclogogo.png" class="logo" alt="logo"></a>
+    <ul>
+        <li><a href="/" th:href = "@{/home}">Главная</a></li>
+        <li><a href="/" th:href = "@{/courses}">Курсы</a></li>
+        <li><a href="/" th:href = "@{/shop}">Магазин</a></li>
+        <li><a href="/" th:href = "@{/faq}">FAQ</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</header>
+
+<div class="row">
+    <div class="container">
+
+        <div th:each="elem : ${courses}" id="course">
+            <a th:href="@{/courses/{course_id} (course_id = ${elem.getCourse().getId()} ) }" th:text="${elem.getCourse().getName()}">VALUE</a>
+            <p th:text="${elem.getAmount()}">VALUE</p>
+            <br/>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
